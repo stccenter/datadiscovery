@@ -6,7 +6,7 @@ train_data = []
 train_labels = []
 test_data = []
 test_labels = []
-with open('D:/pythone workspace/ranking/inputDataForSVM.csv', newline='') as csvfile:
+with open('/Users/yjiang/Dropbox/inputDataForSVM.csv', newline='') as csvfile:
     spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
     i = 0;
     for row in spamreader:
