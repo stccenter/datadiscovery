@@ -1,12 +1,13 @@
 #load training & test data
 import csv
 import numpy as np
+from sklearn import preprocessing
 
 train_data = []
 train_labels = []
 test_data = []
 test_labels = []
-with open('/Users/yjiang/Dropbox/inputDataForSVM.csv', newline='') as csvfile:
+with open('/Users/yjiang/Dropbox/DLData/humanlabelled.csv', newline='') as csvfile:
     spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
     i = 0;
     for row in spamreader:
@@ -24,6 +25,10 @@ with open('/Users/yjiang/Dropbox/inputDataForSVM.csv', newline='') as csvfile:
         else:
             train_data.append(feature)
             train_labels.append(label)
+
+scaler = preprocessing.StandardScaler().fit(train_data)
+train_data = scaler.transform(train_data)
+test_data =  scaler.transform(test_data)
 
 #train data with DL model
 from keras.models import Sequential

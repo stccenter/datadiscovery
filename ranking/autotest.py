@@ -26,11 +26,11 @@ def convert(data_array):
 
 # Please replace it with your local file (header removed)
 # Load testing data (human-labelled)
-with open('/Users/yjiang/Dropbox/inputDataForSVM.csv', newline='') as csvfile:
+with open('/Users/yjiang/Dropbox/DLData/humanlabelled.csv', newline='') as csvfile:
     data_iter = csv.reader(csvfile, delimiter=',', quotechar='|')
     input_data = [data for data in data_iter]
 # Load traning data (user-generated)
-with open('/Users/yjiang/Dropbox/inputDataForSVM_auto.csv', newline='') as csvfile:
+with open('/Users/yjiang/Dropbox/DLData/training_auto_new_only_query.csv', newline='') as csvfile:
     data_iter = csv.reader(csvfile, delimiter=',', quotechar='|')
     input_data_2 = [data for data in data_iter]
         
@@ -38,20 +38,24 @@ train, test = train_test_split(input_data, test_size = 0.3)
 test_data, test_labels = convert(test)
 train_data, train_labels = convert(input_data_2)
 
+scaler = preprocessing.StandardScaler().fit(train_data)
+train_data = scaler.transform(train_data)
+test_data =  scaler.transform(test_data)
+
 
 # Build NN 
 model = Sequential()
 model.add(Dense(8, input_dim=10, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(6, activation='relu'))
-model.add(Dropout(0.5))
+# model.add(Dropout(0.5))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(optimizer='rmsprop',
               loss='binary_crossentropy',
               metrics=['accuracy'])
 
 # Batch processing
-model.fit(train_data, train_labels, epochs = 100, batch_size = 128)
+model.fit(train_data, train_labels, epochs = 50, batch_size = 128)
 
 loss_and_metrics = model.evaluate(test_data, test_labels, batch_size = 128)
 print(loss_and_metrics)

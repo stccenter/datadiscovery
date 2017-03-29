@@ -24,7 +24,7 @@ def convert(data_array):
     return feature_array, label_array
 
 # Please replace it with your local file (header removed)
-with open('/Users/yjiang/Dropbox/inputDataForSVM.csv', newline='') as csvfile:
+with open('/Users/yjiang/Dropbox/DLData/humanlabelled.csv', newline='') as csvfile:
     data_iter = csv.reader(csvfile, delimiter=',', quotechar='|')
     input_data = [data for data in data_iter]
         
@@ -32,9 +32,14 @@ train, test = train_test_split(input_data, test_size = 0.3)
 train_data, train_labels = convert(train)
 test_data, test_labels = convert(test)
 
+scaler = preprocessing.StandardScaler().fit(train_data)
+train_data = scaler.transform(train_data)
+test_data =  scaler.transform(test_data)
+
 # Build NN 
 model = Sequential()
 model.add(Dense(8, input_dim=10, activation='relu'))
+model.add(Dense(7, activation='relu'))
 model.add(Dense(6, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(optimizer='rmsprop',
@@ -43,14 +48,14 @@ model.compile(optimizer='rmsprop',
 
 # Batch processing
 #==============================================================================
-# model.fit(train_data, train_labels, epochs=20, batch_size=256)
+# model.fit(train_data, train_labels, epochs=100, batch_size = 128)
 # 
-# loss_and_metrics = model.evaluate(test_data, test_labels, batch_size=256)
+# loss_and_metrics = model.evaluate(test_data, test_labels, batch_size = 128)
 # print(loss_and_metrics)
 #==============================================================================
 
 # Online learning
-increment = 100
+increment = 128
 chunks_train_data = [train_data[x:x+increment] for x in range(0, len(train_data), increment)]
 chunks_train_labels = [train_labels[x:x+increment] for x in range(0, len(train_labels), increment)]
 
