@@ -6,6 +6,8 @@ from sklearn import preprocessing
 # Train data with DL model
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
+from keras.utils import plot_model
+
 # Plot the eva results    
 import matplotlib.pyplot as plt
 
@@ -58,9 +60,10 @@ model.compile(optimizer='rmsprop',
 
 # Batch processing
 model.fit(train_data, train_labels, epochs = 50, batch_size = 128)
-
 loss_and_metrics = model.evaluate(test_data, test_labels, batch_size = 128)
 print(loss_and_metrics)
+# Plot out the model shape
+plot_model(model, to_file='model.png', show_shapes = "true")
 
 # Online learning
 #==============================================================================
