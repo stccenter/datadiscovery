@@ -55,20 +55,13 @@ test_labels = np_utils.to_categorical(test_labels, num_classes=2)
 # Build NN 
 model = Sequential()
 model.add(Dense(8, input_dim=10, activation='relu'))
-model.add(Dropout(0.5))
-# model.add(Dense(6, activation='relu'))
-# model.add(Dense(5, activation='relu'))
+model.add(Dense(6, activation='relu'))
 model.add(Dense(4, activation='relu'))
-model.add(Dropout(0.5))
+# model.add(Dropout(0.5))
 model.add(Dense(2, activation='softmax'))
 model.compile(optimizer='rmsprop',
               loss='binary_crossentropy',
               metrics=['accuracy'])
-
-test_accuracy = [];
-test_loss = [];
-train_accuracy = [];
-train_loss = [];
 
 # Batch processing
 #==============================================================================
