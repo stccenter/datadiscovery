@@ -1,4 +1,4 @@
-# Data description
+## Data description
 
 1. auto_training.csv is the data created based on the hypothesis that downloaded data is more relevant than the clicked data.
 2. auto_training_only_query.csv is the data created based on a similar idea, but it is created based on query only (unmodified).
