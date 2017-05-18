@@ -1,3 +1,5 @@
-# datadiscovery
+# Code description
 
-The goal of this repo is to make the ranking of the [MUDROD](https://github.com/mudrod/mudrod) easier and smarter using deep learning and user behavior data. 
+1. autotest.py and Search ranking.ipynb does almost the same thing. The notebook code uses pandas data frame and does some extra data exploration.
+
+2. online_processing.py and batch_processing.py were just for idea testing
