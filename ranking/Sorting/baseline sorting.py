@@ -54,7 +54,7 @@ print("Loaded model from disk")
 model.compile(optimizer='rmsprop',loss='binary_crossentropy', metrics=['accuracy'])
 print("Model compiled")              
 
-dataframe = pd.read_csv("labelled_queries/gravity.csv")
+dataframe = pd.read_csv("data/labelled_queries/gravity.csv")
 features = dataframe.ix[:,0:10]
 features = scaler.transform(features)
 
@@ -70,7 +70,7 @@ for i in range(len(rank_doc_list)):
     sorted_rows.append(rows.values[rank_doc_list[i]])
     
 #change output file directory 
-with open('gravity_old.csv', 'w', encoding = 'utf-8-sig') as outcsv:
+with open('gravity_sorted.csv', 'w', encoding = 'utf-8-sig') as outcsv:
     writer = csv.writer(outcsv)
     writer.writerow(['term_score', 'releaseDate_score', 'versionNum_score', 'processingL_score', 'allPop_score','monthPop_score', 'userPop_score', 'spatialR_score','temporalR_score','click_score','label'])
     for i in sorted_rows:
