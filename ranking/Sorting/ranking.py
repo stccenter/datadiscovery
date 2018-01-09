@@ -14,7 +14,7 @@ from matplotlib import pyplot as plt
 from sklearn.model_selection import train_test_split
 import os 
 
-dataframe = pd.read_csv("data/auto_training_for_ipy.csv")
+dataframe = pd.read_csv("../data/auto_training_for_ipy.csv")
 train_features = dataframe.ix[:,0:10]
 train_labels = dataframe.ix[:,10:11]
 train_labels['label'] = train_labels['label'].astype(int)
@@ -41,7 +41,7 @@ plt.title('Ranking feature Correlations')
      .plot
      .barh())
 
-dataframe = pd.read_csv("data/humanlabelled_for_ipy.csv")
+dataframe = pd.read_csv("../data/humanlabelled_for_ipy.csv")
 test_features = dataframe.ix[:,0:10]
 test_labels = dataframe.ix[:,10:11]
 test_labels['label'] = test_labels['label'].astype(int)

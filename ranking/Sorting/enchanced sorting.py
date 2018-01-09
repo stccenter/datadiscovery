@@ -40,6 +40,7 @@ def insertion_sort(features, model):
                 rank[j+1] = temp2
     return rank      
 
+# replace it with the new model
 #load model 
 json_file = open('model.json', 'r')
 loaded_model_json = json_file.read()
@@ -51,22 +52,30 @@ loaded_model.load_weights("model.h5")
 model.compile(optimizer='rmsprop',loss='binary_crossentropy', metrics=['accuracy'])
 
 #extract 10 features from documents 
-dataframe = pd.read_csv("data/labelled_queries/quikscat.csv")
-features = dataframe.ix[:,0:10]
-features = scaler.transform(features)
+queries = ["gravity", "ocean pressure", "ocean temperature", "ocean wind", "pathfinder", "quikscat",
+           "radar", "saline density", "sea ice"]
 
-rank = insertion_sort(features, model)
-            
-#re-arrange documents accordingly
-rows = dataframe.ix[:,0:11]
-sorted_rows =[]
-for i in rank:
-    sorted_rows.append(rows.values[i])
-
-#save file 
-with open('results/test/quikscat_sorted1.csv', 'w', encoding = 'utf-8-sig') as outcsv:
-    writer = csv.writer(outcsv)
-    writer.writerow(['term_score', 'releaseDate_score', 'versionNum_score', 'processingL_score', 'allPop_score','monthPop_score', 'userPop_score', 'spatialR_score','temporalR_score','click_score','label'])
-    for i in sorted_rows:
-        writer.writerow(i)
+for q in queries:
+    path = "../data/labelled_queries/" + q + ".csv";
+    dataframe = pd.read_csv(path)
+    
+    output_path = "../data/results/test/" + q + "_sorted.csv";
+    
+    features = dataframe.ix[:,0:10]
+    features = scaler.transform(features)
+    
+    rank = insertion_sort(features, model)
+                
+    #re-arrange documents accordingly
+    rows = dataframe.ix[:,0:11]
+    sorted_rows =[]
+    for i in rank:
+        sorted_rows.append(rows.values[i])
+    
+    #save file 
+    with open(output_path, 'w', encoding = 'utf-8-sig') as outcsv:
+        writer = csv.writer(outcsv)
+        writer.writerow(['term_score', 'releaseDate_score', 'versionNum_score', 'processingL_score', 'allPop_score','monthPop_score', 'userPop_score', 'spatialR_score','temporalR_score','click_score','label'])
+        for i in sorted_rows:
+            writer.writerow(i)
         

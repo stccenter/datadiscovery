@@ -76,15 +76,15 @@ def getIDCG(list, k):
     return float(idcg) 
 
 #change directory of the ranked documents
-dataframe1 = pd.read_csv("results/rank/gravity_sorted.csv")
-dataframe2 = pd.read_csv("results/rank/ocean_pressure_sorted.csv")
-dataframe3 = pd.read_csv("results/rank/ocean_temperature_sorted.csv")
-dataframe4 = pd.read_csv("results/rank/ocean_wind_sorted.csv")
-dataframe5 = pd.read_csv("results/rank/pathfinder_sorted.csv")
-dataframe6 = pd.read_csv("results/rank/quikscat_sorted.csv")
-dataframe7 = pd.read_csv("results/rank/radar_sorted.csv")
-dataframe8 = pd.read_csv("results/rank/saline_density_sorted.csv")
-dataframe9 = pd.read_csv("results/rank/sea_ice_sorted.csv")
+dataframe1 = pd.read_csv("../data/results/test/gravity_sorted.csv")
+dataframe2 = pd.read_csv("../data/results/test/ocean pressure_sorted.csv")
+dataframe3 = pd.read_csv("../data/results/test/ocean temperature_sorted.csv")
+dataframe4 = pd.read_csv("../data/results/test/ocean wind_sorted.csv")
+dataframe5 = pd.read_csv("../data/results/test/pathfinder_sorted.csv")
+dataframe6 = pd.read_csv("../data/results/test/quikscat_sorted.csv")
+dataframe7 = pd.read_csv("../data/results/test/radar_sorted.csv")
+dataframe8 = pd.read_csv("../data/results/test/saline density_sorted.csv")
+dataframe9 = pd.read_csv("../data/results/test/sea ice_sorted.csv")
 
 
 label1 = dataframe1.ix[:,10:11]
@@ -342,14 +342,14 @@ for i in range(len(precision_list1)):
     array = np.array([precision_list1[i],precision_list2[i], precision_list3[i], precision_list4[i], precision_list5[i], precision_list6[i], precision_list7[i], precision_list8[i], precision_list9[i], average])
     total_list_precision.append(array)
    
-with open('results/rank/NDCG_graph.csv', 'w', encoding = 'utf-8-sig') as outcsv:
+with open('../data/results/rank/NDCG_graph.csv', 'w', encoding = 'utf-8-sig') as outcsv:
     writer = csv.writer(outcsv)
     writer.writerow(['label'])
     writer.writerow(['gravity', 'ocean_pressure', 'ocean_temperature', 'ocean_wind', 'pathfinder','quikscat', 'radar', 'saline_density','sea_ice', 'MLP'])
     for i in total_list_NDCG:
         writer.writerow(i)
         
-with open('results/rank/precision_graph.csv', 'w', encoding = 'utf-8-sig') as outcsv:
+with open('../data/results/rank/precision_graph.csv', 'w', encoding = 'utf-8-sig') as outcsv:
     writer = csv.writer(outcsv)
     writer.writerow(['label'])
     writer.writerow(['gravity', 'ocean_pressure', 'ocean_temperature', 'ocean_wind', 'pathfinder','quikscat', 'radar', 'saline_density','sea_ice', 'MLP'])
