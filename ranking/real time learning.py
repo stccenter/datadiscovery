@@ -80,7 +80,7 @@ test_loss = [];
 train_accuracy = [];
 train_loss = [];
 
-increment = 32
+increment = 256
 chunks_train_data = [train_data[x:x+increment] for x in range(0, len(train_data), increment)]
 chunks_train_labels = [train_labels[x:x+increment] for x in range(0, len(train_labels), increment)]
 

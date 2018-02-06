@@ -1,3 +1,6 @@
+# The code here is only used to test the possibility of online learning where only humanlabelled data is used.
+
+
 # Read csv & model selection
 import csv
 import numpy as np

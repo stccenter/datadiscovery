@@ -1,3 +1,5 @@
+# The code here is only used to test whether DL can be used for ranking
+
 #load training & test data
 import csv
 import numpy as np
