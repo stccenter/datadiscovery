@@ -61,4 +61,4 @@ for i in range(0, len(classifiers)):
     predict = model.predict(test_data)
     print("{}: {}".format(names[i], accuracy_score(test_labels, predict))) # or you can just do str(int);
 
-
+# great reference here: http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html

@@ -1,7 +1,6 @@
 # Read csv & model selection
 import csv
 import numpy as np
-from sklearn.model_selection import train_test_split
 from sklearn import preprocessing
 # Train data with DL model
 from keras.models import Sequential
