@@ -39,13 +39,10 @@ with open('/Users/yjiang/Dropbox/DLData/humanlabelled.csv', newline='') as csvfi
     data_iter = csv.reader(csvfile, delimiter=',', quotechar='|')
     input_test_data = [data for data in data_iter]
 
-        
-# train, test = train_test_split(input_data, test_size = 0.3)
-# test_data, test_labels = convert(test)
 train_data, train_labels = convert(input_train_data)
 test_data_x, test_labels = convert(input_test_data)
 
-# scaler = preprocessing.StandardScaler().fit(test_data)
+# StandardScaler uses z-score, MinMaxScaler converts data to [0,1]
 scaler = preprocessing.StandardScaler().fit(train_data)
 train_data = scaler.transform(train_data)
 test_data =  scaler.transform(test_data_x)
