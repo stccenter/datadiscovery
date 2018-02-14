@@ -30,16 +30,18 @@ train_features.term_score.hist()
 print('mean: ', train_features.mean()[0])
 print('var :', train_features.var()[0])
 
-import seaborn as sns
-correlations = train_features.corr()
-corr_heat = sns.heatmap(correlations)
-plt.title('Ranking feature Correlations')
-(correlations
-     .term_score
-     .drop('term_score') 
-     .sort_values(ascending=False)
-     .plot
-     .barh())
+# =============================================================================
+# import seaborn as sns
+# correlations = train_features.corr()
+# corr_heat = sns.heatmap(correlations)
+# plt.title('Ranking feature Correlations')
+# (correlations
+#      .term_score
+#      .drop('term_score') 
+#      .sort_values(ascending=False)
+#      .plot
+#      .barh())
+# =============================================================================
 
 dataframe = pd.read_csv("../data/humanlabelled_for_ipy.csv")
 test_features = dataframe.ix[:,0:10]
@@ -65,7 +67,6 @@ model = Sequential()
 model.add(Dense(8, input_dim=10, activation='relu'))
 model.add(Dense(6, activation='relu'))
 model.add(Dense(4, activation='relu'))
-model.add(Dropout(0.5))
 model.add(Dense(2, activation='softmax'))
 model.compile(optimizer='rmsprop',loss='binary_crossentropy', metrics=['accuracy'])
               
@@ -78,7 +79,7 @@ increment = 64
 chunks_train_data = [train_features[x:x+increment] for x in range(0, len(train_features), increment)]
 chunks_train_labels = [train_labels[x:x+increment] for x in range(0, len(train_features), increment)]
 
-for epoch in range(0, 5):
+for epoch in range(0, 50):
     for i, el in enumerate(chunks_train_data):
         #print(i)
         train_loss_and_metrics = model.train_on_batch(el, chunks_train_labels[i])

@@ -39,7 +39,8 @@ from keras.layers import Dense, Activation
 #construct network
 model = Sequential()
 model.add(Dense(20, input_dim=10, activation='relu'))
-model.add(Dense(20, activation='relu'))
+model.add(Dense(10, activation='relu'))
+model.add(Dense(5, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(optimizer='rmsprop',
               loss='binary_crossentropy',
